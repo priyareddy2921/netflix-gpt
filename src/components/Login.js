@@ -1,7 +1,22 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Header from "./Header";
+import Validate from "../utils/Validate";
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+  const name = useRef(null);
+  const email = useRef(null);
+  const password = useRef(null);
+  const ValidateData = () => {
+    // console.log(email);
+    // console.log(password);
+    const message = Validate(
+      email.current.value,
+      password.current.value,
+      name.current.value
+    );
+    setErrorMessage(message);
+  };
   const toggleSignIn = () => {
     setIsSignIn(!isSignIn);
   };
@@ -15,29 +30,41 @@ const Login = () => {
           alt="bg_image"
         ></img>
       </div>
-      <form className="rounded-lg flex flex-col align-middle w-3/12 absolute p-10 bg-black m-36 mx-auto left-0 right-0 bg-opacity-80">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+        className="rounded-lg flex flex-col align-middle w-3/12 absolute p-10 bg-black m-36 mx-auto left-0 right-0 bg-opacity-80"
+      >
         <h1 className="text-white text-xl font-bold py-4">
           {isSignIn ? "SignIn" : "SignUp"}
         </h1>
 
         <input
-          className="my-4 p-2 w-full align-middle bg-gray-800"
+          ref={email}
+          className="my-4 p-2 w-full align-middle bg-gray-800 text-white"
           type="text"
           placeholder="email address"
         ></input>
         {!isSignIn && (
           <input
-            className="my-4 p-2 w-full align-middle bg-gray-800"
+            ref={name}
+            className="my-4 p-2 w-full align-middle bg-gray-800 text-white"
             type="text"
             placeholder="Full Name"
           ></input>
         )}
         <input
-          className="my-4 p-2 w-full align-middle bg-gray-800"
+          ref={password}
+          className="my-4 p-2 w-full align-middle bg-gray-800 text-white"
           type="password"
           placeholder="password"
         ></input>
-        <button className="py-2 my-6  h-10 w-full rounded-lg bg-red-700 text-white">
+        <p className="text-red-500 font-bold">{errorMessage}</p>
+        <button
+          onClick={ValidateData}
+          className="py-2 my-6  h-10 w-full rounded-lg bg-red-700 text-white"
+        >
           {isSignIn ? "SignIn" : "SignUp"}
         </button>
         <p className="text-white cursor-pointer" onClick={toggleSignIn}>
