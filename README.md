@@ -7,6 +7,11 @@ Login form
 signup form
 form validation
 use ref hook
+firebase setup
+deploying app to production
+create Signup
+implement SignIn
+create redux store
 
 # Features:
 
@@ -28,4 +33,4 @@ redirect to browse
 
   npm i -D react-router-dom
   use createBrowserRouter function for appRouter
-  import router provider and give it to return
+  import router provider
