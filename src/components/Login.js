@@ -11,6 +11,7 @@ import {
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { PHOTO_URL } from "../utils/constants";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -22,13 +23,13 @@ const Login = () => {
   const ValidateData = () => {
     // console.log(email);
     // console.log(password);
-    console.log(email.current.value, password.current.value);
+    // console.log(email.current.value, password.current.value);
     const message = Validate(
       email.current.value,
       password.current.value
       // name.current.value
     );
-    console.log(message);
+    // console.log(message);
     setErrorMessage(message);
     if (message) return;
     if (!isSignIn) {
@@ -42,7 +43,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL: "https://example.com/jane-q-user/profile.jpg",
+            photoURL: { PHOTO_URL },
           })
             .then(() => {
               // Profile updated!
@@ -51,7 +52,7 @@ const Login = () => {
               dispatch(
                 addUser({ uid: uid, email: email, displayName: displayName })
               );
-              navigate("/browse");
+              // navigate("/browse");
             })
             .catch((error) => {
               // An error occurred
@@ -75,7 +76,7 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
+          // console.log(user);
           navigate("/browse");
           // ...
         })
