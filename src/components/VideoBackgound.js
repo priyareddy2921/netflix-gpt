@@ -9,7 +9,7 @@ const VideoBackgound = ({ movieId }) => {
 
   //   console.log(trailerVideo);
   return (
-    <div className="w-screen">
+    <div className="w-screen bg-black">
       <iframe
         className="w-screen h-screen aspect-video"
         width="560"

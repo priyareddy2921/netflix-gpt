@@ -26,6 +26,8 @@
 24.fetch data for trailer video
 25.update store with trailer video data
 26.embedded the youtube video and make it autoplay and mute
+27.Build secondary component
+28.display movieslists
 
 # Features:
 
